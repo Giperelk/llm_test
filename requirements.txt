@@ -1,1 +1,6 @@
 django==5.0.2
+django-environ==0.11.2
+psycopg2==2.9.9
+langchain==0.1.12
+pypdf2==3.0.1
+cohere==4.55

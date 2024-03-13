@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Завантажити документ{% endblock %}
+{% block content %}
+    <h1 class="text-center fs-2 mt-5 mb-4 fw-semibold">Завантажити документ</h1>
+
+
+    <form class="text-center fw-semibold" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark w-25 mt-3 rounded fw-semibold" type="submit">Завантажити</button>
+    </form>
+{% endblock %}

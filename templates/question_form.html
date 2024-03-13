@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Поставити запитання{% endblock %}
+{% block content %}
+
+    <h1 class="text-center fs-2 mt-5 mb-4 fw-semibold">Поставити запитання</h1>
+    <textarea class="d-block mx-auto w-25 px-3 fs-5 text-dark fw-light fst-italic" id="question" rows="4" cols="50"></textarea>
+    <label for="document" class="form-label d-block text-center fs-5 fw-semibold mt-3 mb-4" >Оберіть документ:</label>
+    <select class="form-select w-25 d-block mx-auto mb-3" id="document">
+        {% for document in documents %}
+            <option value="{{ document.id }}">{{ document.name }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn d-block mx-auto btn-dark w-25 rounded" onclick="sendQuestion()">
+        <div class="spinner-border d-none mx-auto" role="status" id="spinner"></div>
+        <p class="mb-0">Отримати відповідь</p>
+    </button>
+  <div class="card mt-5 mb-5 mx-auto d-none w-75">
+  <h5 class="card-header">Відповідь:</h5>
+  <div class="card-body">
+      <div id="response"></div>
+  </div>
+</div>
+
+
+    <script>
+        const spinner = document.getElementById("spinner");
+        function showSpinner() {
+            spinner.nextElementSibling.textContent="";
+            spinner.classList.remove("d-none");
+            spinner.classList.add("d-block");
+        }
+
+        function hideSpinner() {
+            spinner.nextElementSibling.textContent = "Отримати відповідь";
+            spinner.classList.remove("d-block");
+            spinner.classList.add("d-none");
+        }
+
+        function sendQuestion() {
+            const question = document.getElementById('question').value;
+            const documentId = document.getElementById('document').value;
+            showSpinner();
+            fetch('/get-answer/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify({question: question, document_id: documentId})
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideSpinner();
+                document.querySelector(".card").classList.remove("d-none");
+                document.getElementById('response').textContent = data.answer;
+            })
+            .catch(error => console.error('Помилка:', error));
+        }
+    </script>
+{% endblock %}
