@@ -8,21 +8,16 @@ from langchain_core.documents import Document
 
 def parse_pdf(pdf_file):
     pdf_text = ""
-    try:
-        with open(pdf_file, 'rb') as file:
-            reader = PyPDF2.PdfReader(file)
-            for page_num in range(len(reader.pages)):
-                page = reader.pages[page_num]
-                pdf_text += page.extract_text()
-    except Exception as e:
-        # Обробка помилок при парсингу PDF
-        print("Помилка при парсингу PDF:", e)
+    with open(pdf_file, 'rb') as file:
+        reader = PyPDF2.PdfReader(file)
+        for page_num in range(len(reader.pages)):
+            page = reader.pages[page_num]
+            pdf_text += page.extract_text()
     return pdf_text
 
 
 def get_cohere_answer(pdf_path, question):
-    COHERE_API_KEY = settings.COHERE_API_KEY
-    llm = ChatCohere()
+    llm = ChatCohere(cohere_api_key=settings.COHERE_API_KEY)
     page_content = parse_pdf(pdf_path)
     prompt = ChatPromptTemplate.from_template(
         """Answer the following question based only on the provided context :
