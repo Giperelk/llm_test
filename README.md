@@ -42,7 +42,7 @@ To stop the project and remove the containers, use the command:
    ```
 
 ## Usage
-After starting the project, you can access the application through your web browser to upload PDF documents and ask questions based on them.
+After starting the project, you can access the application through [your web browser](http://127.0.0.1:8000) to upload PDF documents and ask questions based on them.
 
 ## License
 This project is licensed under the MIT License.
