@@ -44,8 +44,5 @@ To stop the project and remove the containers, use the command:
 ## Usage
 After starting the project, you can access the application through your web browser to upload PDF documents and ask questions based on them.
 
-## Contributing
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
-
 ## License
 This project is licensed under the MIT License.
