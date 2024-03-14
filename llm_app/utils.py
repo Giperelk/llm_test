@@ -8,7 +8,7 @@ from langchain_core.documents import Document
 
 def parse_pdf(pdf_file):
     pdf_text = ""
-    with open(pdf_file, 'rb') as file:
+    with open(fr"{settings.MEDIA_ROOT}/{pdf_file}", 'rb') as file:
         reader = PyPDF2.PdfReader(file)
         for page_num in range(len(reader.pages)):
             page = reader.pages[page_num]

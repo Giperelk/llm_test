@@ -1,5 +1,5 @@
 .env
 venv
 *.sqlite3
-documents
+media
 .ruff_cache

@@ -1,0 +1,10 @@
+# Ignore all
+**
+
+# Exclude
+!llm_app/
+!core/
+!templates/
+!manage.py
+!requirements.txt
+!Makefile
