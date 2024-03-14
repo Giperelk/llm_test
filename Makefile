@@ -1,8 +1,8 @@
 init-config:
-	sudo cp .env.example .env
+	cp .env.example .env
 
 run:
-	sudo docker compose up --build
+	docker compose up --build -d
 
 stop:
-	sudo docker compose down
+	docker compose down
