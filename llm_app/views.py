@@ -31,12 +31,11 @@ class QuestionFormView(TemplateView):
     template_name = 'question_form.html'
 
     def get(self, request):
-        documents = Document.objects.all()  # Отримати всі документи з бази даних
+        documents = Document.objects.all()
         return render(request, 'question_form.html', {'documents': documents})
 
     def post(self, request, *args, **kwargs):
         question = request.POST.get('question')
-        # Реалізація генерації відповіді буде тут
         answer = "Це ваша відповідь на запитання: " + question
         return JsonResponse({'answer': answer})
 
@@ -53,10 +52,8 @@ def get_answer(request):
 
     data = json.loads(request.body)
 
-    # Отримайте текст з PDF-файлу за його id
     uploaded_document = Document.objects.get(id=data['document_id'])
 
-    # Отримайте питання з POST-запиту користувача
     question = data['question']
 
     return JsonResponse({"answer": get_cohere_answer(str(uploaded_document.file), question)})
